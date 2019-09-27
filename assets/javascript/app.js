@@ -9,7 +9,7 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a",
+    correctValue: 1,
     name: "first"
 },
 {
@@ -20,7 +20,7 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a",
+    correctValue: 1,
     name: "second"
 },
 {
@@ -31,7 +31,7 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a",
+    correctValue: 1,
     name: "third"
 },
 {
@@ -42,17 +42,25 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a",
+    correctValue: 1,
     name: "fourth"
 }
 ]
 
+var counterID=0;
 // append the questions and array of answers and the names to the HTML
+// Each multiple choice answer has a unique number ID starting from 1
+// The values of the answers vary from 1 to 4
+// Now, without looking at the values of the answers, we can just check to see which ID's were checked because those will be correct answers
+// For right now, correct answers have the ID 1,5,9,13
 var newDiv = $("#quiz"); 
 for(var i=0; i<quiz.length;i++){
     newDiv.append("<div>"+quiz[i].question+"</div>");
     for(var x=0; x<quiz[i].answers.length;x++){
-        newDiv.append("<div><input type='radio' name='"+quiz[i].name+"'>" +quiz[i].answers[x]+ "</div>");
+        counterID++;
+        newDiv.append("<div><input id='"+counterID+"' value= "+(x+1)+" type='radio' name='"
+        +quiz[i].name+"'>"
+         +quiz[i].answers[x]+ "</div>");
     }
 }
 
@@ -93,3 +101,47 @@ for(var i=0; i<quiz.length;i++){
     
   }
 
+// still need to tally up correct answers and then display the results
+// also the submit button and the timer should redirect to another page 
+// most likely using the innerhtml where the whole body div changes to something else
+// after the form is completed, we need to tally the number of "correct" values from the radio buttons
+// to determine how many answers the user got right
+
+var correct=0;
+var incorrect=0;
+
+
+
+
+var score = function(){
+    
+        var valueFirst = $("input[name='first']:checked").val();
+        if(valueFirst==1){
+            alert("correct");
+            correct++;
+            console.log("correct: "+correct);
+        } 
+        var valueSecond = $("input[name='second']:checked").val();
+         if(valueSecond==1){
+            alert("correct");
+            correct++;
+            console.log("correct: "+correct);
+        } 
+        var valueThird = $("input[name='third']:checked").val();
+        if(valueThird==1){
+            alert("correct");
+            correct++;
+            console.log("correct: "+correct);
+        }
+        var valueFourth = $("input[name='fourth']:checked").val();
+        if(valueFourth==1){
+            alert("correct");
+            correct++;
+            console.log("correct: "+correct);
+        } 
+
+}
+$(document).ready(function(){
+
+    
+});
