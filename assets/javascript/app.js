@@ -66,9 +66,6 @@ for(var i=0; i<quiz.length;i++){
 
   //START THE TIMER
   start();
-
-//STOPWATCH
-// =============================
   //  Variable that will hold our setInterval that runs the stopwatch
   var intervalId;
   
@@ -76,6 +73,18 @@ for(var i=0; i<quiz.length;i++){
   var clockRunning = false;
   var time = 10;
 
+  //Function to count the time and reduce its number by 1 and display it on the display div.
+  function count() {
+    time--;
+    
+    if(time<10){
+        $("#display").text("00:0"+time);
+
+    }else{
+        $("#display").text("00:"+time);
+    }
+    console.log("In the count function" + time)
+  }
   function start() {
   
     // DONE: Use setInterval to start the count here and set the clock to running.
@@ -85,20 +94,14 @@ for(var i=0; i<quiz.length;i++){
     }
 
   }
+ 
+  //We know the stop function actually works, because it has stopped time
   function stop() {
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
     clockRunning = false;
-  }
-  function count() {
-    time--;
-    if(time<10){
-        $("#display").text("00:0"+time);
-
-    }else{
-        $("#display").text("00:"+time);
-    }
-    
+    console.log("we have stopped time!");
+    console.log("time stopped at: "+time);
   }
 
 // still need to tally up correct answers and then display the results
@@ -107,41 +110,58 @@ for(var i=0; i<quiz.length;i++){
 // after the form is completed, we need to tally the number of "correct" values from the radio buttons
 // to determine how many answers the user got right
 
-var correct=0;
-var incorrect=0;
 
 
 
 
+// In the html, the score function is called when the user hits submit
 var score = function(){
-    
+
+var correct=0;
+var incorrect=quiz.length;
+var unanswered=0;
+//create a variable to retrieve the valuye of the checked answer in the first question and then see if it matches the value of our correctValue
         var valueFirst = $("input[name='first']:checked").val();
-        if(valueFirst==1){
-            alert("correct");
+        if(valueFirst==quiz[0].correctValue){
             correct++;
-            console.log("correct: "+correct);
+        } else if(valueFirst==null){
+            unanswered++;
         } 
         var valueSecond = $("input[name='second']:checked").val();
-         if(valueSecond==1){
-            alert("correct");
+         if(valueSecond==quiz[1].correctValue){
             correct++;
-            console.log("correct: "+correct);
+        } else if(valueSecond==null){
+            unanswered++;
         } 
         var valueThird = $("input[name='third']:checked").val();
-        if(valueThird==1){
-            alert("correct");
+        if(valueThird==quiz[2].correctValue){
             correct++;
-            console.log("correct: "+correct);
-        }
+        }else if(valueThird==null){
+            unanswered++;
+        } 
         var valueFourth = $("input[name='fourth']:checked").val();
-        if(valueFourth==1){
-            alert("correct");
+        if(valueFourth==quiz[3].correctValue){
             correct++;
-            console.log("correct: "+correct);
+        } else if(valueFourth==null){
+            unanswered++;
         } 
 
-}
-$(document).ready(function(){
+        incorrect = incorrect-correct-unanswered;
+        
+        console.log("correct: " + correct);
+        console.log("incorrect: "+ incorrect);
+        console.log("unanswered: " + unanswered);
+        
+            $("#results").append('<br><p>Correct: '+correct +'</p>');
+            $("#results").append('<p>Incorrect: '+incorrect +'</p>');
+            $("#results").append('<p>Missed: '+unanswered +'</p>');
+        
 
-    
-});
+}
+
+//NOW we must create a function that changes to the amount correct, missed, and incorrect to display results.
+// it will take in 3 variables
+
+
+ // call the stop function after a specified time in ms
+ setTimeout(function(){stop(); score()},10000);
