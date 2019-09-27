@@ -159,6 +159,11 @@ var unanswered=0;
         console.log("unanswered: " + unanswered);
         
             $("#lowerBody").text(' Correct: '+correct+' Incorrect: '+incorrect+' Missed: '+unanswered);
+            if (correct==4){
+                $("#lowerBody").append("<br><br><p> Perfect!</p>");
+            } else{
+                $("#lowerBody").append("<br><br><p> Hit refresh to retry for a perfect score!</p>");
+            }
         
 
 }
