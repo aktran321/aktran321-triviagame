@@ -157,7 +157,7 @@ var unanswered=0;
         console.log("correct: " + correct);
         console.log("incorrect: "+ incorrect);
         console.log("unanswered: " + unanswered);
-        
+            $("#direction").text(" ");
             $("#lowerBody").text(' Correct: '+correct+' Incorrect: '+incorrect+' Missed: '+unanswered);
             if (correct==4){
                 $("#lowerBody").append("<br><br><p> Perfect!</p>");
