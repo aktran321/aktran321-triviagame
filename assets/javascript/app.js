@@ -8,7 +8,8 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a"
+    correctAnswer: "a",
+    name: "first"
 },
 {
     question: "2) Who snapped away Thanos?",
@@ -18,7 +19,8 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a"
+    correctAnswer: "a",
+    name: "second"
 },
 {
     question: "3) Who snapped away Thanos?",
@@ -28,7 +30,8 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a"
+    correctAnswer: "a",
+    name: "third"
 },
 {
     question: "4) Who snapped away Thanos?",
@@ -38,7 +41,8 @@ var quiz = [
         "c: Spiderman",
         "d: George"
     ],
-    correctAnswer: "a"
+    correctAnswer: "a",
+    name: "fourth"
 }
 ]
 // An array of objects, which will be our quiz questions
@@ -50,9 +54,9 @@ var newDiv = $("#quiz");
 for(var i=0; i<quiz.length;i++){
     newDiv.append("<div>"+quiz[i].question+"</div>");
     for(var x=0; x<quiz[i].answers.length;x++){
-        newDiv.append("<div><button>"+quiz[i].answers[x]+"<button></div>");
+        newDiv.append("<div><input type='radio' name='"+quiz[i].name+"'>" +quiz[i].answers[x]+ "</div>");
     }
-    
-    console.log(quiz[0].answers.a);
 }
+
+
 
