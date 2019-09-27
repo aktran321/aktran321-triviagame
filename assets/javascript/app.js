@@ -72,6 +72,7 @@ for(var i=0; i<quiz.length;i++){
   // prevents the clock from being sped up unnecessarily
   var clockRunning = false;
   var time = 10;
+  var updatedTime=0;
 
   //Function to count the time and reduce its number by 1 and display it on the display div.
   function count() {
@@ -84,6 +85,9 @@ for(var i=0; i<quiz.length;i++){
         $("#display").text("00:"+time);
     }
     console.log("In the count function" + time)
+    updatedTime= time;
+    return updatedTime;
+
   }
   function start() {
   
@@ -94,7 +98,8 @@ for(var i=0; i<quiz.length;i++){
     }
 
   }
- 
+ // call the stop function after a specified time in ms
+ var t =setTimeout(function(){stop(); score()},10000);
   //We know the stop function actually works, because it has stopped time
   function stop() {
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
@@ -102,6 +107,7 @@ for(var i=0; i<quiz.length;i++){
     clockRunning = false;
     console.log("we have stopped time!");
     console.log("time stopped at: "+time);
+    clearTimeout(t);
   }
 
 // still need to tally up correct answers and then display the results
@@ -152,9 +158,7 @@ var unanswered=0;
         console.log("incorrect: "+ incorrect);
         console.log("unanswered: " + unanswered);
         
-            $("#results").append('<br><p>Correct: '+correct +'</p>');
-            $("#results").append('<p>Incorrect: '+incorrect +'</p>');
-            $("#results").append('<p>Missed: '+unanswered +'</p>');
+            $("#lowerBody").text(' Correct: '+correct+' Incorrect: '+incorrect+' Missed: '+unanswered);
         
 
 }
@@ -163,5 +167,4 @@ var unanswered=0;
 // it will take in 3 variables
 
 
- // call the stop function after a specified time in ms
- setTimeout(function(){stop(); score()},10000);
+ 
