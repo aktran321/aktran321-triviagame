@@ -1,4 +1,5 @@
-
+// quiz, which is just an array of objects. Each object has a question, an array of answers, and a unique name
+// as well as a correct answer
 var quiz = [
 {
     question: "1) Who snapped away Thanos?",
@@ -45,11 +46,8 @@ var quiz = [
     name: "fourth"
 }
 ]
-// An array of objects, which will be our quiz questions
 
-// now we want to put the quiz questions in our $(#quiz) div
-// grab the element, make a for loop, for every question make a new paragraph,
-// then make one more paragraph for the answers and turn them into buttons.
+// append the questions and array of answers and the names to the HTML
 var newDiv = $("#quiz"); 
 for(var i=0; i<quiz.length;i++){
     newDiv.append("<div>"+quiz[i].question+"</div>");
@@ -58,5 +56,40 @@ for(var i=0; i<quiz.length;i++){
     }
 }
 
+  //START THE TIMER
+  start();
 
+//STOPWATCH
+// =============================
+  //  Variable that will hold our setInterval that runs the stopwatch
+  var intervalId;
+  
+  // prevents the clock from being sped up unnecessarily
+  var clockRunning = false;
+  var time = 10;
+
+  function start() {
+  
+    // DONE: Use setInterval to start the count here and set the clock to running.
+    if (!clockRunning) {
+      intervalId = setInterval(count, 1000);
+      clockRunning = true;
+    }
+
+  }
+  function stop() {
+    // DONE: Use clearInterval to stop the count here and set the clock to not be running.
+    clearInterval(intervalId);
+    clockRunning = false;
+  }
+  function count() {
+    time--;
+    if(time<10){
+        $("#display").text("00:0"+time);
+
+    }else{
+        $("#display").text("00:"+time);
+    }
+    
+  }
 
