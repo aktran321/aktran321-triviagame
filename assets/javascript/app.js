@@ -7,42 +7,42 @@ var quiz = [
         "a: Ironman",
         "b: Captain America",
         "c: Spiderman",
-        "d: George"
+        "d: Yo momma"
     ],
     correctValue: 1,
     name: "first"
 },
 {
-    question: "2) Who snapped away Thanos?",
+    question: "2) You are currently 3rd place in a race. If you pass the person in 2nd place, what place are you?",
     answers: [
-        "a: Ironman",
-        "b: Captain America",
-        "c: Spiderman",
-        "d: George"
+        "a: 1st",
+        "b: 2nd",
+        "c: 3rd",
+        "d: LAST"
     ],
-    correctValue: 1,
+    correctValue: 2,
     name: "second"
 },
 {
-    question: "3) Who snapped away Thanos?",
+    question: "3) The answer is really big.",
     answers: [
-        "a: Ironman",
-        "b: Captain America",
-        "c: Spiderman",
-        "d: George"
+        "a: THE ANSWER.",
+        "b: Really big.",
+        "c: An elephant.",
+        "d: Yo momma."
     ],
-    correctValue: 1,
+    correctValue: 4,
     name: "third"
 },
 {
-    question: "4) Who snapped away Thanos?",
+    question: "4) If you crack open a peanut alone in your room and eat it, then you were the only person to ever see that peanut in its entire life.",
     answers: [
-        "a: Ironman",
-        "b: Captain America",
-        "c: Spiderman",
-        "d: George"
+        "a: True",
+        "b: False",
+        "c: Wow, that's deep bro...",
+        "d: I'll make sure the next peanut I eat lives a good life )':"
     ],
-    correctValue: 1,
+    correctValue: 3,
     name: "fourth"
 }
 ]
@@ -55,7 +55,7 @@ var counterID=0;
 // For right now, correct answers have the ID 1,5,9,13
 var newDiv = $("#quiz"); 
 for(var i=0; i<quiz.length;i++){
-    newDiv.append("<div>"+quiz[i].question+"</div>");
+    newDiv.append("<br><br><div>"+quiz[i].question+"</div>");
     for(var x=0; x<quiz[i].answers.length;x++){
         counterID++;
         newDiv.append("<div><input id='"+counterID+"' value= "+(x+1)+" type='radio' name='"
@@ -71,7 +71,7 @@ for(var i=0; i<quiz.length;i++){
   
   // prevents the clock from being sped up unnecessarily
   var clockRunning = false;
-  var time = 10;
+  var time = 30;
   var updatedTime=0;
 
   //Function to count the time and reduce its number by 1 and display it on the display div.
@@ -99,7 +99,7 @@ for(var i=0; i<quiz.length;i++){
 
   }
  // call the stop function after a specified time in ms
- var t =setTimeout(function(){stop(); score()},10000);
+ var t =setTimeout(function(){stop(); score()},30000);
   //We know the stop function actually works, because it has stopped time
   function stop() {
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
@@ -139,9 +139,11 @@ var unanswered=0;
         } else if(valueSecond==null){
             unanswered++;
         } 
+        var thirdquestionwrong = true;
         var valueThird = $("input[name='third']:checked").val();
         if(valueThird==quiz[2].correctValue){
             correct++;
+            thirdquestionwrong = false;
         }else if(valueThird==null){
             unanswered++;
         } 
@@ -158,12 +160,18 @@ var unanswered=0;
         console.log("incorrect: "+ incorrect);
         console.log("unanswered: " + unanswered);
             $("#direction").text(" ");
+            
             $("#lowerBody").text(' Correct: '+correct+' Incorrect: '+incorrect+' Missed: '+unanswered);
+            
+            if (thirdquestionwrong ==true){
+                $("#lowerBody").append("<br><br><br><p> Okay I'll admit, the answer for the third question is arguably rude...</p>");
+            }
             if (correct==4){
                 $("#lowerBody").append("<br><br><p> Perfect!</p>");
             } else{
-                $("#lowerBody").append("<br><br><p> Hit refresh to retry for a perfect score!</p>");
+                $("#lowerBody").append("<br><p> Hit refresh to retry for a perfect score!</p>");
             }
+            
         
 
 }
